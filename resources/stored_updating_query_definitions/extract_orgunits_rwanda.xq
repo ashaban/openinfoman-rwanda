@@ -40,6 +40,7 @@ let $entities:=
   for $orgUnit in $orgUnits
   let $level := xs:integer($orgUnit/@level)
   let $id := $orgUnit/@id
+  let $code := $orgUnit/@code
   let $uuid := string($orgUnit/@uuid)
   let $displayName:=string($orgUnit/@name)
   let $pid:=string($orgUnit/dxf:parent/@id)
@@ -57,6 +58,7 @@ let $entities:=
     then
       <csd:facility entityID="{$facEntityID}">
         <csd:otherID assigningAuthorityName="http://www.datim.org/orgUnit" code="id">{string($id)}</csd:otherID>
+        <csd:otherID assigningAuthorityName="http://www.datim.org/orgUnit" code="code">{string($code)}</csd:otherID>
 	{
 	  if (not(functx:all-whitespace($uuid)))
 	  then <csd:otherID assigningAuthorityName="http://www.datim.org/orgUnit" code="uuid">{string($uuid)}</csd:otherID>
@@ -83,6 +85,7 @@ let $entities:=
   let $org_entity :=
     <csd:organization entityID="{$orgEntityID}">
       <csd:otherID assigningAuthorityName="http://www.datim.org/orgUnit" code="id">{string($id)}</csd:otherID>
+      <csd:otherID assigningAuthorityName="http://www.datim.org/orgUnit" code="code">{string($code)}</csd:otherID>
       {
 	if (not(functx:all-whitespace($uuid)))
 	then <csd:otherID assigningAuthorityName="http://www.datim.org/orgUnit" code="uuid">{string($uuid)}</csd:otherID>
