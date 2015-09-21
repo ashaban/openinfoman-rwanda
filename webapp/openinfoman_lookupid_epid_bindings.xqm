@@ -69,11 +69,11 @@ declare
     </csd:requestParams>
 
   let $results := csr_proc:process_CSR_stored_results($csd_webconf:db, $doc,$requestParams)
-  let $epid := substring-after(string($provider[1]/@entityID),'urn:uuid:')
+  let $epid := substring-after(string($results[1]/@entityID),'urn:uuid:')
 
   return 
     if (exists($epid) and string-length($epid) > 0) 
-      $epid
+    then $epid
     else 
       (:error :)
       <http:response status="404" message="No provider found with ID number '{$id_number}' and ID type '{$id_type}'.">
